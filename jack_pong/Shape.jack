@@ -1,0 +1,74 @@
+class Shape
+{
+    // Location of the shape
+    field int x, y;
+
+    //Size of the shape
+    field int size_x, size_y;
+
+    constructor Shape new(int Ax, int Ay, int size_Ax, int size_Ay)
+    {
+        // set the starting points of the rectagnle
+        let x = Ax;
+        let y = Ay;
+        // set the sizes of the rectangle
+        let size_x = size_Ax;
+        let size_y = size_Ay;
+
+        // draw the rectangle
+        do draw();
+        
+        return this;
+    }
+
+    method void dispose()
+    {
+        // Dispose of the current shape
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void draw()
+    {
+        // Set color to black
+        do Screen.setColor(true);
+        // Draw rectangle at set points with set size
+        do Screen.drawRectangle(x, y, size_x, size_y);
+        return;
+    }
+
+    method void moveUp()
+    {
+        if (y > 1)
+        {
+            // Set color to white
+            do Screen.setColor(false);
+            // Draw the white rectangle, erasing the old one
+            do Screen.drawRectangle(x, y, size_x, y + size_y);
+            // Set the color to black
+            do Screen.setColor(true);
+            // Draw a new rectangle at two position up
+            let y = y - 3;
+            do Screen.drawRectangle(x, y, size_x, y + size_y);
+        }
+        return;
+    }
+
+    method void moveDown()
+    {
+        if ((y + size_y) < 254)
+        {
+            // Set color to white
+            do Screen.setColor(false);
+            // Draw the white rectangle, erasing the old one
+            do Screen.drawRectangle(x, y, size_x, y + size_y);
+            // Set the color to black
+            do Screen.setColor(true);
+            // Draw a new rectangle at two position down
+            let y = y + 3;
+            do Screen.drawRectangle(x, y, size_x, y + size_y);
+        }
+        return;
+    }
+
+}

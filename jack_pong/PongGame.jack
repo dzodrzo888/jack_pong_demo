@@ -1,0 +1,82 @@
+class PongGame
+{
+    // Shape initialization
+    field Shape left_shape, right_shape;
+
+    field int left_direction, right_direction;
+
+    constructor PongGame new()
+    {
+        let left_shape = Shape.new(6,0, 15, 40);
+        let right_shape = Shape.new(495, 0, 504, 40);
+        let left_direction = 0;
+        let right_direction = 0;
+        
+        return this;
+    }
+
+    method void dispose()
+    {
+        do left_shape.dispose();
+        do right_shape.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void run()
+    {
+        var char key;
+        var boolean exit;
+        let exit = false;
+
+        while (~exit)
+        {
+            while (key = 0)
+            {
+                let left_direction = 0;
+                let right_direction = 0;
+                let key = Keyboard.keyPressed();
+                do moveShape();
+            }
+            if (key = 119)
+            {
+                let left_direction = 1;
+            }
+            if (key = 115)
+            {
+                let left_direction = 2;
+            }
+            if (key = 131)
+            {
+                let right_direction = 1;
+            }
+            if (key = 133)
+            {
+                let right_direction = 2;
+            }
+            while (~(key = 0))
+            {
+                let key = Keyboard.keyPressed();
+                do moveShape();
+            }
+        }
+        return;
+    }
+    method void moveShape()
+    {
+        if (left_direction = 1) {
+            do left_shape.moveUp();
+        }
+        if (left_direction = 2) {
+            do left_shape.moveDown();
+        }
+        if (right_direction = 1) {
+            do right_shape.moveUp();
+        }
+        if (right_direction = 2) {
+            do right_shape.moveDown();
+        }
+        do Sys.wait(1);
+        return;
+    }
+}

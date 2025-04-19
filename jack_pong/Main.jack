@@ -1,0 +1,10 @@
+class Main 
+{
+    function void main() {
+        var PongGame pong;
+        let pong = PongGame.new();
+        do pong.run();
+        do pong.dispose();
+        return;
+    }
+}
